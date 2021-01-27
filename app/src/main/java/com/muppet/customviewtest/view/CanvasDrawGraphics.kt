@@ -2,10 +2,7 @@ package com.muppet.customviewtest.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -65,7 +62,7 @@ class CanvasDrawGraphics(context: Context, attrs: AttributeSet) : View(context, 
         )
 
         //绘制直线
-        canvas?.drawLine(50f, 80f, 500f, 80f, getPaint(R.color.color_2))
+        canvas?.drawLine(50f, 80f, 150f, 80f, getPaint(R.color.color_2))
         canvas?.drawLines(
             floatArrayOf(
                 200f, 80f, 400f, 80f,
@@ -76,32 +73,46 @@ class CanvasDrawGraphics(context: Context, attrs: AttributeSet) : View(context, 
         //绘制矩形
         //三种效果都是一样，二、三两种最大的区别就是精度不同
         //第一种方式
-        canvas?.drawRect(100f, 450f, 500f, 600f, getPaint(R.color.color_3))
+        canvas?.drawRect(100f, 100f, 300f, 200f, getPaint(R.color.color_3))
         //第二种方式
-        val rect = Rect(100, 450, 500, 600)
+        val rect = Rect(100, 100, 300, 200)
         canvas?.drawRect(rect, getPaint(R.color.color_3))
         //第三种
-        val rectF = RectF(100f, 450f, 500f, 600f)
+        val rectF = RectF(100f, 100f, 300f, 200f)
         canvas?.drawRect(rectF, getPaint(R.color.color_3))
 
         //绘制圆角矩形
         //两种方式效果一样，但第二种方法在API21的时候才添加上，所以我们一般使用的都是第一种。
         //第一种
-        val rectF_1 = RectF(100f, 650f, 500f, 850f)
+        val rectF_1 = RectF(350f, 100f, 500f, 200f)
         canvas?.drawRoundRect(rectF_1, 30f, 30f, getPaint(R.color.color_4))
         //第二种
-        canvas?.drawRoundRect(100f, 650f, 500f, 850f, 30f, 30f, getPaint(R.color.color_4))
+        canvas?.drawRoundRect(350f, 100f, 500f, 200f, 30f, 30f, getPaint(R.color.color_4))
 
         //绘制椭圆
         //两种效果一样，但一般使用第一种，原理就是绘制矩形的内切圆
         //第一种方式
-        val rectF_2 = RectF(50f, 900f, 450f, 1100f)
+        val rectF_2 = RectF(50f, 220f, 200f, 320f)
         canvas?.drawOval(rectF_2, getPaint(R.color.color_5))
         //第二种
-        canvas?.drawOval(50f,900f,450f,1100f,getPaint(R.color.color_5))
+        canvas?.drawOval(50f,220f,200f,320f,getPaint(R.color.color_5))
 
         //绘制圆
-        canvas?.drawCircle(100f,1200f,50f,getPaint(R.color.color_6))
+        //绘制圆形有四个参数，前两个是圆心坐标，第三个是半径，最后一个是画笔。
+        canvas?.drawCircle(280f,270f,50f,getPaint(R.color.color_6))
+
+        //绘制圆弧
+        val rectF_3 = RectF(50f,340f,150f,400f)
+
+        //绘制背景 1
+        canvas?.drawRect(rectF_3,getPaint(Color.GRAY))
+        //startAngle 表示开始角度，sweepAngle 表示扫过角度， useCenter 是否使用中心
+        //未使用中心点
+        canvas?.drawArc(rectF_3,0f,90f,false,getPaint(R.color.color_7))
+        //
+        //使用中心点
+
+
     }
 
     /**
